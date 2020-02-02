@@ -1,4 +1,4 @@
-from dice_roller import Die
+from dice_rolling import Die
 
 
 class RollBuilder:

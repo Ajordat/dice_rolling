@@ -2,12 +2,12 @@ import pathlib
 
 from setuptools import setup
 
-from dice_roller import __version__
+from dice_rolling import __version__
 
 README = (pathlib.Path(__file__).parent / "README.md").read_text()
 
 setup(
-    name="dice_roller",
+    name="dice_rolling",
     version=__version__,
     description="Module to roll multiple dice.",
     long_description=README,
@@ -20,11 +20,11 @@ setup(
         "License :: OSI Approved :: MIT License",
         "Programming Language :: Python :: 3.8"
     ],
-    packages=["dice_roller"],
+    packages=["dice_rolling"],
     include_package_data=True,
     entry_points={
         "console_scripts": [
-            "roll=dice_roller.main:main"
+            "roll=dice_rolling.main:main"
         ]
     }
 )

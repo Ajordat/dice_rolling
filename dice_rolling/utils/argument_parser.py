@@ -1,7 +1,7 @@
 import argparse
 import re
 
-from dice_roller import __version__
+from dice_rolling import __version__
 
 
 class ParsingResult:

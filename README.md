@@ -1,4 +1,4 @@
-# Dice roller
+# Dice rolling
 
 This module aims to implement the throw of many types of dice.
 
@@ -7,7 +7,7 @@ This module aims to implement the throw of many types of dice.
 Simply run:
 
 ```bash
-pip install dice_roller
+pip install dice_rolling
 ```
 
 ## CLI usage
@@ -29,7 +29,7 @@ roll 3d20
 To use this module you should use the class RollBuilder to implement the throws:
 
 ```python
-from dice_roller import RollBuilder
+from dice_rolling import RollBuilder
 
 builder = RollBuilder()
 builder.set_amount_of_dice(3)

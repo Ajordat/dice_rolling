@@ -1,5 +1,5 @@
-from dice_roller import RollBuilder
-from dice_roller.utils.argument_parser import ArgumentParser
+from dice_rolling import RollBuilder
+from dice_rolling.utils.argument_parser import ArgumentParser
 
 
 def main():
