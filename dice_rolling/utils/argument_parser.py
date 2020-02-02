@@ -6,13 +6,22 @@ from dice_rolling import __version__
 
 class ParsingResult:
     def __init__(self):
-        self.n_dice = 0
+        self.n_dice = 1
         self.n_sides = 0
+        self.addition = 0
         self.seed = None
+
+    def __setattr__(self, key, value):
+        if value is not None:
+            # Set the int value to the attribute if the value is not None.
+            super().__setattr__(key, int(value))
+        elif key in ['seed']:
+            # If the key is in the list of allowed keys to be set as None, allow.
+            super().__setattr__(key, None)
 
 
 def request_type(arg):
-    regex = re.compile(r'^(\d+)d(\d+)$')
+    regex = re.compile(ArgumentParser.REQUEST_REGEX)
     if not regex.match(arg):
         raise argparse.ArgumentParser
     return arg
@@ -20,27 +29,28 @@ def request_type(arg):
 
 class ArgumentParser(argparse.ArgumentParser):
 
+    REQUEST_REGEX = r'^(\d*)d(\d+)(?:\+(\d+))?$'
+
     def __init__(self):
-        super().__init__(
-            description="Dice roller.",
-            add_help=True
-        )
+        super().__init__(description="Dice roller.", add_help=True)
 
         self.add_argument('request', type=request_type)
         self.add_argument('-s', '--seed', dest='seed', default=None)
-        self.add_argument(
-            '-v', '--version',
-            action='version', version=__version__
-        )
+        self.add_argument('-v', '--version', action='version', version=__version__)
 
     def parse(self):
         args = self.parse_args()
         result = ParsingResult()
 
-        regex_result = re.search(r'^(\d+)d(\d+)$', args.request, re.IGNORECASE)
+        regex_result = re.search(self.REQUEST_REGEX, args.request, re.IGNORECASE)
 
-        result.n_dice = int(regex_result.group(1))
-        result.n_sides = int(regex_result.group(2))
+        try:
+            result.n_dice = regex_result.group(1)
+        except ValueError:
+            result.n_dice = 1
+
+        result.n_sides = regex_result.group(2)
+        result.addition = regex_result.group(3)
 
         if result.n_sides == 0:
             import sys
