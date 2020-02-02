@@ -59,7 +59,7 @@ class RollBuilder:
         has been set.
         """
         self.__rolls = []
-        for i in range(self.__n_dice):
+        for _ in range(self.__n_dice):
             self.__rolls.append(
                 Die(self.__n_sides).roll() + self.__addition
             )

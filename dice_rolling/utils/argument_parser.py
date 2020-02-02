@@ -90,7 +90,7 @@ class ArgumentParser(argparse.ArgumentParser):
         if result.n_sides == 0:
             # The program must have at least one side per die.
             import sys
-            print("A dice must have at least one side.", file=sys.stderr)
+            print("A die must have at least one side.", file=sys.stderr)
             exit(3)
 
         if args.seed:
