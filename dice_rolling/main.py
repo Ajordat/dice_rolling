@@ -18,7 +18,13 @@ def main():
     b.build()
 
     # Send the full result to stdout.
-    print(b.get_full_result())
+    result = b.get_full_result()
+
+    if not result[2]:
+        print(f"Rolled {args.full_request} and got {result[0]}. {result[1]}")
+    else:
+        print(f"Rolled {args.full_request} and got {result[0]}. "
+              f"Kept {result[1]} and discarded {result[2]}.")
 
 
 if __name__ == "__main__":

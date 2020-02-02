@@ -1,5 +1,6 @@
 import argparse
 import re
+from contextlib import suppress
 from typing import Any
 
 from dice_rolling import __version__
@@ -9,7 +10,7 @@ class ParsingResult:
     """Class to contain the full parsed arguments.
     """
 
-    def __init__(self):
+    def __init__(self, request: str):
         """Constructor of ParsingResult.
         """
         self.n_dice = 1
@@ -17,15 +18,20 @@ class ParsingResult:
         self.addition = 0
         self.keep = 0
         self.seed = None
+        self.full_request = request
 
     def __setattr__(self, key: str, value: Any) -> None:
         """Overwritten method to set an attribute. This is done to cast the value to
         integer if possible."""
         if value or value == 0:
-            # Set the int value to the attribute if the value is not None.
-            super().__setattr__(key, int(value))
+            # Set the value to the attribute if the value is not None.
+            with suppress(ValueError):
+                value = int(value)
+            super().__setattr__(key, value)
+
         elif key in ['seed']:
-            # If the key is in the list of allowed keys to be set as None, set.
+            # If the key is in the list of allowed keys to be set as None, set it.
+            # The other attributes will not update its value in this case.
             super().__setattr__(key, None)
 
 
@@ -60,7 +66,7 @@ class ArgumentParser(argparse.ArgumentParser):
         """
 
         args = self.parse_args()
-        result = ParsingResult()
+        result = ParsingResult(args.request)
 
         # Apply the regex to the received argument to extract the values as groups.
         regex_result = re.search(self.REQUEST_REGEX, args.request, re.IGNORECASE)

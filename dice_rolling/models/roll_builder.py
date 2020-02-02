@@ -78,9 +78,9 @@ class RollBuilder:
         """
         return self.__rolls
 
-    def get_full_result(self) -> Tuple[list, list]:
+    def get_full_result(self) -> Tuple[int, list, list]:
         """Method to obtain the full results of the complete roll.
 
         :returns: The full results of the full roll. The kept and the discarded rolls.
         """
-        return self.__rolls, self.__discarded
+        return sum(self.__rolls), self.__rolls, self.__discarded
