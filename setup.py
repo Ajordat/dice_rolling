@@ -1,6 +1,7 @@
 import pathlib
 
 from setuptools import setup
+from setuptools import find_packages
 
 from dice_rolling import __version__
 
@@ -20,7 +21,7 @@ setup(
         "License :: OSI Approved :: MIT License",
         "Programming Language :: Python :: 3.8"
     ],
-    packages=["dice_rolling"],
+    packages=find_packages(),
     include_package_data=True,
     entry_points={
         "console_scripts": [
