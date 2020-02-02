@@ -55,8 +55,14 @@ class ArgumentParser(argparse.ArgumentParser):
         """Constructor of ArgumentParser. Sets the allowed arguments."""
         super().__init__(description="Dice roller.", add_help=True)
 
-        self.add_argument('request', type=request_type)
-        self.add_argument('-s', '--seed', dest='seed', default=None)
+        self.add_argument(
+            'request', type=request_type,
+            help="roll description with modifiers, for instance, 3d6+2"
+        )
+        self.add_argument(
+            '-s', '--seed', dest='seed', default=None,
+            help="dice's seed for testing purposes"
+        )
         self.add_argument('-v', '--version', action='version', version=__version__)
 
     def parse(self) -> ParsingResult:
