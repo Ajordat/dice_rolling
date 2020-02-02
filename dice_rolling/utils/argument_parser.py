@@ -9,10 +9,11 @@ class ParsingResult:
         self.n_dice = 1
         self.n_sides = 0
         self.addition = 0
+        self.keep = 0
         self.seed = None
 
     def __setattr__(self, key, value):
-        if value is not None:
+        if value or value == 0:
             # Set the int value to the attribute if the value is not None.
             super().__setattr__(key, int(value))
         elif key in ['seed']:
@@ -29,7 +30,7 @@ def request_type(arg):
 
 class ArgumentParser(argparse.ArgumentParser):
 
-    REQUEST_REGEX = r'^(\d*)d(\d+)(?:\+(\d+))?$'
+    REQUEST_REGEX = r'^(\d*)d(\d+)(?:\+(\d+))?(k(h|l)\d+)?$'
 
     def __init__(self):
         super().__init__(description="Dice roller.", add_help=True)
@@ -44,13 +45,13 @@ class ArgumentParser(argparse.ArgumentParser):
 
         regex_result = re.search(self.REQUEST_REGEX, args.request, re.IGNORECASE)
 
-        try:
-            result.n_dice = regex_result.group(1)
-        except ValueError:
-            result.n_dice = 1
-
+        result.n_dice = regex_result.group(1)
         result.n_sides = regex_result.group(2)
         result.addition = regex_result.group(3)
+
+        keep = regex_result.group(4)
+        if keep:
+            result.keep = int(keep[2:]) * (1 if keep[1] == 'h' else -1)
 
         if result.n_sides == 0:
             import sys

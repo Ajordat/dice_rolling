@@ -9,6 +9,7 @@ def main():
     b.set_amount_of_dice(args.n_dice)
     b.set_number_of_sides(args.n_sides)
     b.addition_to_roll(args.addition)
+    b.keep_n(args.keep)
     b.build()
 
     print(b.get_result())
