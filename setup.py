@@ -1,16 +1,20 @@
+import pathlib
+
 from setuptools import setup
 
 from dice_roller import __version__
 
+README = (pathlib.Path(__file__).parent / "README.md").read_text()
+
 setup(
     name="dice_roller",
     version=__version__,
-    description="Module to roll a dice with certain variations.",
+    description="Module to roll multiple dice.",
+    long_description=README,
+    long_description_content_type="text/markdown",
     url="https://github.com/Ajordat/dice_roller",
     author="Ajordat",
     author_email="alexjortri@gmail.com",
-    maintainer="Ajordat",
-    maintainer_email="alexjortri@gmail.com",
     license="MIT",
     classifiers=[
         "License :: OSI Approved :: MIT License",

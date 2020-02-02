@@ -1,4 +1,4 @@
-from .models.dice import Dice
+from .models.die import Die
 from .models.roll_builder import RollBuilder
 
 VERSION = (1, 0, 0)

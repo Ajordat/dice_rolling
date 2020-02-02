@@ -6,7 +6,7 @@ def main():
     args = ArgumentParser().parse()
 
     b = RollBuilder(args.seed)
-    b.set_number_of_dices(args.n_dice)
+    b.set_amount_of_dice(args.n_dice)
     b.set_number_of_sides(args.n_sides)
     b.build()
 
