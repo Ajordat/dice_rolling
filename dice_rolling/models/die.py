@@ -2,10 +2,10 @@ from random import Random
 
 
 class Die:
+    rand = Random()
 
-    def __init__(self, sides=6, seed=None):
+    def __init__(self, sides=6):
         self.sides = sides
-        self.r = Random(seed)
 
     def roll(self):
-        return self.r.randint(1, self.sides)
+        return self.rand.randint(1, self.sides)
