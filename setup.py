@@ -1,7 +1,7 @@
 import pathlib
 
-from setuptools import setup
 from setuptools import find_packages
+from setuptools import setup
 
 from dice_rolling import __version__
 
@@ -19,7 +19,8 @@ setup(
     license="MIT",
     classifiers=[
         "License :: OSI Approved :: MIT License",
-        "Programming Language :: Python :: 3.8"
+        "Programming Language :: Python :: 3.8",
+        "Programming Language :: Python :: 3.7"
     ],
     packages=find_packages(),
     include_package_data=True,

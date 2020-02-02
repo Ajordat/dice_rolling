@@ -7,7 +7,7 @@ This module aims to implement the throw of many types of dice.
 Simply run:
 
 ```bash
-pip install dice_rolling
+pip install dice-rolling
 ```
 
 ## CLI usage
