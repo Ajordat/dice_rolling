@@ -15,13 +15,15 @@ pip install dice-rolling
 Once installed, a throw of a simple die of 6 sides can be performed with:
 
 ```bash
-roll 1d6
+$ roll 1d6
+[4]
 ```
 
 Or, for instance, to throw three 20-sided dice can be as simple as:
 
 ```bash
-roll 3d20
+$ roll 3d20
+[14, 9, 13]
 ```
 
 ## Module usage
@@ -39,11 +41,43 @@ builder.build()
 print(builder.get_result())
 ```
 
-*More methods will be added to the builder in the future.*
 
 ## Throws
 
-Currently it only supports the following throws:
+The request must start with `x`d`y`, where `x` is the number of dice and `y` the number of faces of each die.
 
-- `x`d`y`: Where `x` is the number of dice and `y` the number of faces of each die.
+For example, to roll 4 6-sided dice:
+```bash
+$ roll 4d6
+[5, 2, 3, 6]
+```
+
+After that, the following modifiers have been implemented
+(using the previous result as reference):
+
+- `+a`: Add the value of `a` to each die.
+  For example, to roll 4 6-sided dice and add 3 to each roll:
+  ```bash
+  $ roll 4d6+3
+  [8, 5, 6, 9]
+  ```
+
+- `khb`: `K`eep the `H`ighest `b`.
+  For example, to roll 4 6-sided dice and keep the highest 2:
+  ```bash
+  $ roll 4d6kh2
+  ([5, 6], [3, 2])
+  ```
+- `klc`: `K`eep the `L`owest `c`.
+  For example, to roll 4 6-sided dice and keep the lowest 2:
+  ```bash
+  $ roll 4d6kl2
+  ([2, 3], [5, 6])
+  ```
+
+Of course you can use together an addition with any of the *keep* actions:
+```bash
+$ roll 4d6+5kh2
+([11, 10], [8, 7])
+```
 
